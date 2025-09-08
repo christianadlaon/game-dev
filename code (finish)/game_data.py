@@ -2,7 +2,7 @@ TRAINER_DATA = {
 	'o1': {
 		'monsters': {0: ('Jacana', 14), 1: ('Cleaf', 15)},
 		'dialog': {
-			'default': ['Hey, how are you?', 'Oh, so you want to fight?', 'FIGHT!'], 
+			'default': ['Is that you chardet?', 'Oh, Gusto nimo og away?', 'Sige wlay hilakay!'], 
 			'defeated': ['You are very strong!', 'Let\'s fight again sometime?']},
 		'directions': ['down'],
 		'look_around': True,

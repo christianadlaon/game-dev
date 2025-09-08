@@ -166,19 +166,21 @@ class Game:
 
 	# dialog system
 	def input(self):
-		if not self.dialog_tree and not self.battle:
-			keys = pygame.key.get_just_pressed()
-			if keys[pygame.K_SPACE]:
-				for character in self.character_sprites:
-					if check_connections(100, self.player, character):
-						self.player.block()
-						character.change_facing_direction(self.player.rect.center)
-						self.create_dialog(character)
-						character.can_rotate = False
-
-			if keys[pygame.K_RETURN]:
-				self.index_open = not self.index_open
-				self.player.blocked = not self.player.blocked
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				exit()
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_SPACE:
+					# Handle space key press
+					pass
+				elif event.key == pygame.K_RETURN:
+					# Handle enter key press
+					pass
+				elif event.key == pygame.K_ESCAPE:
+					# Handle escape key press
+					pass
+				# Add other key handlers as needed
 
 	def create_dialog(self, character):
 		if not self.dialog_tree:

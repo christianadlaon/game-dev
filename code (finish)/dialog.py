@@ -17,7 +17,14 @@ class DialogTree:
 		self.dialog_timer = Timer(500, autostart = True)
 
 	def input(self):
-		keys = pygame.key.get_just_pressed()
+		keys_just_pressed = []
+		for event in pygame.event.get():
+			if event.type == pygame.KEYDOWN:
+				keys_just_pressed.append(event.key)
+		
+		# Simulate get_just_pressed() behavior
+		keys = {key: key in keys_just_pressed for key in range(512)}  # pygame key range
+
 		if keys[pygame.K_SPACE] and not self.dialog_timer.active:
 			self.current_dialog.kill()
 			self.dialog_index += 1
@@ -45,8 +52,9 @@ class DialogSprite(pygame.sprite.Sprite):
 		# background
 		surf = pygame.Surface((width, height), pygame.SRCALPHA)
 		surf.fill((0,0,0,0))
-		pygame.draw.rect(surf, COLORS['pure white'], surf.get_frect(topleft = (0,0)),0, 4)
-		surf.blit(text_surf, text_surf.get_frect(center = (width / 2, height / 2)))
+		pygame.draw.rect(surf, COLORS['pure white'], surf.get_rect(),0, 4)
+		text_rect = text_surf.get_rect(center = (width / 2, height / 2))  # Changed from get_frect
+		surf.blit(text_surf, text_rect)
 
 		self.image = surf
-		self.rect = self.image.get_frect(midbottom = character.rect.midtop + vector(0,-10))
+		self.rect = self.image.get_rect(midbottom = character.rect.midtop + vector(0,-10))  # Also fix this line
